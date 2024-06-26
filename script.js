@@ -1,32 +1,26 @@
-//your code here!
-document.addEventListener('DOMContentLoaded', function () {
-    const list = document.getElementById('infinite-list');
+const list = document.querySelector('ul'); // get the list element
+let itemCount = 10; // number of items to add by default
 
-    // Function to add list items
-    function addListItems(numItems) {
-        for (let i = 0; i < numItems; i++) {
-            const listItem = document.createElement('li');
-            listItem.textContent = `Item ${list.children.length + 1}`;
-            list.appendChild(listItem);
-        }
-    }
+// Add initial items to the list
+for (let i = 1; i <= itemCount; i++) {
+  const li = document.createElement('li');
+  li.textContent = `Item ${i}`;
+  list.appendChild(li);
+}
 
-    // Add initial list items
-    addListItems(10);
+// Function to add more items to the list
+function addItems() {
+  for (let i = 1; i <= 2; i++) {
+    itemCount++;
+    const li = document.createElement('li');
+    li.textContent = `Item ${itemCount}`;
+    list.appendChild(li);
+  }
+}
 
-    // Infinite scroll function
-    function infiniteScroll() {
-        const scrollTop = window.scrollY;
-        const windowHeight = window.innerHeight;
-        const documentHeight = document.documentElement.scrollHeight;
-
-        if (scrollTop + windowHeight >= documentHeight - 5) {
-            // User reached the end of the list, add more items
-            addListItems(2);
-        }
-    }
-
-    // Attach scroll event listener to window
-    window.addEventListener('scroll', infiniteScroll);
+// Check if the user has reached the bottom of the list
+window.addEventListener('scroll', () => {
+  if (window.scrollY + window.innerHeight >= document.body.scrollHeight) {
+    addItems();
+  }
 });
-
