@@ -1,26 +1,27 @@
-const list = document.querySelector('ul'); // get the list element
-let itemCount = 10; // number of items to add by default
+document.addEventListener('DOMContentLoaded', () => {
+    const list = document.getElementById('infi-list');
+    let listItemCount = 0;
 
-// Add initial items to the list
-for (let i = 1; i <= itemCount; i++) {
-  const li = document.createElement('li');
-  li.textContent = `Item ${i}`;
-  list.appendChild(li);
-}
+    // Function to add list items
+    function addListItems(count) {
+        for (let i = 0; i < count; i++) {
+            const li = document.createElement('li');
+            li.textContent = `List Item ${listItemCount + 1}`;
+            list.appendChild(li);
+            listItemCount++;
+        }
+    }
 
-// Function to add more items to the list
-function addItems() {
-  for (let i = 1; i <= 2; i++) {
-    itemCount++;
-    const li = document.createElement('li');
-    li.textContent = `Item ${itemCount}`;
-    list.appendChild(li);
-  }
-}
+    // Add initial 10 list items
+    addListItems(10);
 
-// Check if the user has reached the bottom of the list
-window.addEventListener('scroll', () => {
-  if (window.scrollY + window.innerHeight >= document.body.scrollHeight) {
-    addItems();
-  }
+    // Function to check if user reached the end of the list
+    function checkScroll() {
+        if (list.scrollTop + list.clientHeight >= list.scrollHeight - 10) { // Small buffer to ensure it works properly
+            addListItems(2);
+        }
+    }
+
+    // Add scroll event listener
+    list.addEventListener('scroll', checkScroll);
 });
