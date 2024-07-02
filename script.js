@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function addListItems(count) {
         for (let i = 0; i < count; i++) {
             const li = document.createElement('li');
-            li.textContent = `Item ${listItemCount + 1}`;
+            li.textContent = `List Item ${listItemCount + 1}`;
             list.appendChild(li);
             listItemCount++;
         }
